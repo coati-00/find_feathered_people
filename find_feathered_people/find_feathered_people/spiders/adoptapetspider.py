@@ -15,17 +15,25 @@ class AdoptAPetSpider(scrapy.Spider):
         requests made'''
         #initialelement = response.css("div.pet_results.rounded_corner")
         for initialelement in response.css("div.pet_results.rounded_corner"):
-            name = initialelement.css('p a.name::text').extract()
-            detailslink = initialelement.css('a::attr(href)').extract()
-            # add follow link method
-            birdgender = initialelement.css(":first-child a").extract()
-            rescueorgtownstate = initialelement.css("p a.name").extract()
-            phototag = initialelement.css("span.featured-thumbnail a img").extract()
-            photo = initialelement.css("img::attr(src)").extract()
-            print(dict(name=name, detailslink=detailslink,
-                       birdgender=birdgender,
-                       rescueorgtownstate=rescueorgtownstate,
-                       phototag=phototag, photo=photo))
+            yield {
+                'name' : initialelement.css('p a.name::text').extract(),
+                'detailslink' : initialelement.css('a::attr(href)').extract(),
+                'birdgender' : initialelement.css(":first-child a").extract(),
+                'rescueorgtownstate' : initialelement.css("p a.name").extract(),
+                'phototag' : initialelement.css("span.featured-thumbnail a img").extract(),
+                'photo' : initialelement.css("img::attr(src)").extract(),
+            }
+            # name = initialelement.css('p a.name::text').extract()
+            # detailslink = initialelement.css('a::attr(href)').extract()
+            # # add follow link method
+            # birdgender = initialelement.css(":first-child a").extract()
+            # rescueorgtownstate = initialelement.css("p a.name").extract()
+            # phototag = initialelement.css("span.featured-thumbnail a img").extract()
+            # photo = initialelement.css("img::attr(src)").extract()
+            # print(dict(name=name, detailslink=detailslink,
+            #            birdgender=birdgender,
+            #            rescueorgtownstate=rescueorgtownstate,
+            #            phototag=phototag, photo=photo))
         # species = scrapy.Field()
         # color = response.css(
         # age = response.css(
