@@ -18,11 +18,20 @@ class AdoptAPetSpider(scrapy.Spider):
         print name
         detailslink = initialelement.css('a::attr(href)').extract()
         print detailslink
-        '''species = scrapy.Field()
-        color = scrapy.Field()
-        age = scrapy.Field()
-        gender = scrapy.Field()
-        page = response.url.split("/")
+        # follow link method
+        birdgender = initialelement.css(":first-child a").extract()
+        rescueorgtownstate = initialelement.css("p a.name").extract()
+        phototag = initialelement.css("span.featured-thumbnail a img").extract()
+        photo = initialelement.css("img::attr(src)").extract()
+        print birdgender
+        print rescueorgtownstate
+        print phototag
+        print photo
+        # species = scrapy.Field()
+        # color = response.css(
+        # age = response.css(
+        # gender = response.css(
+        '''page = response.url.split("/")
         filename = 'petfinder-s%.html' % page
         with open(filename, 'wb') as fil:
             fil.write(response.body)
