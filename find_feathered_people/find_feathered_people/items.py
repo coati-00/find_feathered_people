@@ -22,7 +22,6 @@ class FeatheredPersonAdoptAPetItem(scrapy.Item):
     color = scrapy.Field()
     age = scrapy.Field()
     gender = scrapy.Field()
-    birdname = scrapy.Field()
     smallphoto = scrapy.Field()
     largephoto = scrapy.Field()
     infobox = scrapy.Field()

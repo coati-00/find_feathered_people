@@ -13,8 +13,17 @@ class AdoptAPetSpider(scrapy.Spider):
     def parse(self, response):
         '''for now save the pages - handle download for each of the
         requests made'''
+        initialelement = response.css("div.pet_results.rounded_corner")
+        name = initialelement.css('p a.name::text').extract()
+        print name
+        detailslink = initialelement.css('a::attr(href)').extract()
+        print detailslink
+        '''species = scrapy.Field()
+        color = scrapy.Field()
+        age = scrapy.Field()
+        gender = scrapy.Field()
         page = response.url.split("/")
         filename = 'petfinder-s%.html' % page
         with open(filename, 'wb') as fil:
             fil.write(response.body)
-        self.log('Saved file as %s' % filename)
+        self.log('Saved file as %s' % filename)'''
