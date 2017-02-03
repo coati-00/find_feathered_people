@@ -13,14 +13,16 @@ class AdoptAPetSpider(scrapy.Spider):
     def parse(self, response):
         '''for now save the pages - handle download for each of the
         requests made'''
-        #initialelement = response.css("div.pet_results.rounded_corner")
+        # the selector for bird gender seems to return gender
+        # and age if there is an age
         for initialelement in response.css("div.pet_results.rounded_corner"):
             yield {
                 'name' : initialelement.css('p a.name::text').extract(),
                 'detailslink' : initialelement.css('a::attr(href)').extract(),
-                'birdgender' : initialelement.css(":first-child a").extract(),
-                'rescueorgtownstate' : initialelement.css("p a.name").extract(),
-                'phototag' : initialelement.css("span.featured-thumbnail a img").extract(),
+                'birdgender' : initialelement.css(
+                    "div.pet_results.rounded_corner > a::text").extract(),
+                'rescueorgtownstate' : initialelement.css(
+                    "p a.smaller_line_height.track::text").extract(),
                 'photo' : initialelement.css("img::attr(src)").extract(),
             }
             # name = initialelement.css('p a.name::text').extract()
