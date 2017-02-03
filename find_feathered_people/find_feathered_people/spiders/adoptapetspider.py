@@ -13,20 +13,19 @@ class AdoptAPetSpider(scrapy.Spider):
     def parse(self, response):
         '''for now save the pages - handle download for each of the
         requests made'''
-        initialelement = response.css("div.pet_results.rounded_corner")
-        name = initialelement.css('p a.name::text').extract()
-        print name
-        detailslink = initialelement.css('a::attr(href)').extract()
-        print detailslink
-        # follow link method
-        birdgender = initialelement.css(":first-child a").extract()
-        rescueorgtownstate = initialelement.css("p a.name").extract()
-        phototag = initialelement.css("span.featured-thumbnail a img").extract()
-        photo = initialelement.css("img::attr(src)").extract()
-        print birdgender
-        print rescueorgtownstate
-        print phototag
-        print photo
+        #initialelement = response.css("div.pet_results.rounded_corner")
+        for initialelement in response.css("div.pet_results.rounded_corner"):
+            name = initialelement.css('p a.name::text').extract()
+            detailslink = initialelement.css('a::attr(href)').extract()
+            # add follow link method
+            birdgender = initialelement.css(":first-child a").extract()
+            rescueorgtownstate = initialelement.css("p a.name").extract()
+            phototag = initialelement.css("span.featured-thumbnail a img").extract()
+            photo = initialelement.css("img::attr(src)").extract()
+            print(dict(name=name, detailslink=detailslink,
+                       birdgender=birdgender,
+                       rescueorgtownstate=rescueorgtownstate,
+                       phototag=phototag, photo=photo))
         # species = scrapy.Field()
         # color = response.css(
         # age = response.css(
