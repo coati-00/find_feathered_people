@@ -1,0 +1,8 @@
+.project
+.pydevproject
+_*
+find_feathered_people/config.json
+find_feathered_people/error.log
+*.pyc
+*.json
+venv/

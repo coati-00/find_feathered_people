@@ -38,3 +38,4 @@ Twisted==16.6.0
 w3lib==1.16.0
 wrapt==1.10.8
 zope.interface==4.3.3
+sqlalchemy==1.1.5
